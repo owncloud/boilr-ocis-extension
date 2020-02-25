@@ -2,7 +2,7 @@
 {{- range $index, $changes := . }}{{ with $changes -}}
 # Changelog for [{{ .Version }}] ({{ .Date }})
 
-The following sections list the changes in ownCloud ocis-hello {{ .Version }}.
+The following sections list the changes in ownCloud`}}{{ Name }}{{`{{ .Version }}.
 
 {{ if gt (len $allVersions) 1 -}}
 {{/* creating version compare links */ -}}
@@ -10,17 +10,17 @@ The following sections list the changes in ownCloud ocis-hello {{ .Version }}.
 {{ if ne (len $allVersions) $next -}}
 {{ $previousVersion := (index $allVersions $next).Version -}}
 {{ if eq .Version "unreleased" -}}
-[{{ .Version }}]: https://github.com/owncloud/ocis-hello/compare/v{{ $previousVersion }}...master
+[{{ .Version }}]: https://github.com/owncloud/`}}{{ Name }}{{`/compare/v{{ $previousVersion }}...master
 
 {{ else -}}
-[{{ .Version }}]: https://github.com/owncloud/ocis-hello/compare/v{{ $previousVersion }}...v{{ .Version }}
+[{{ .Version }}]: https://github.com/owncloud/`}}{{ Name }}{{`/compare/v{{ $previousVersion }}...v{{ .Version }}
 
 {{ end -}}
 {{ end -}}
 
 {{- /* last version managed by calens, end of the loop */ -}}
 {{ if eq .Version "0.1.0" -}}
-[{{ .Version }}]: https://github.com/owncloud/ocis-hello/compare/c43f3a33cb0b57d7e25ebc88c138d22e95f88cfe...v{{ .Version }}
+[{{ .Version }}]: https://github.com/owncloud/`}}{{ Name }}{{`/compare/c43f3a33cb0b57d7e25ebc88c138d22e95f88cfe...v{{ .Version }}
 
 {{ end -}}
 {{- end -}}
