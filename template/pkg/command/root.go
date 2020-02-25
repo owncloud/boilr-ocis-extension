@@ -5,21 +5,21 @@ import (
 	"strings"
 
 	"github.com/micro/cli/v2"
-	"github.com/owncloud/ocis-ocs/pkg/config"
-	"github.com/owncloud/ocis-ocs/pkg/flagset"
-	"github.com/owncloud/ocis-ocs/pkg/version"
+	"github.com/owncloud/{{ Name }}/pkg/v2/config"
+	"github.com/owncloud/{{ Name }}/pkg/v2/flagset"
+	"github.com/owncloud/{{ Name }}/pkg/v2/version"
 	"github.com/owncloud/ocis-pkg/v2/log"
 	"github.com/spf13/viper"
 )
 
-// Execute is the entry point for the ocis-ocs command.
+// Execute is the entry point for the {{ Name }} command.
 func Execute() error {
 	cfg := config.New()
 
 	app := &cli.App{
-		Name:     "ocis-ocs",
+		Name:     "{{ Name }}",
 		Version:  version.String,
-		Usage:    "Serve OCS API for oCIS",
+		Usage:    "{{ CmdUsage }}",
 		Compiled: version.Compiled(),
 
 		Authors: []*cli.Author{
@@ -35,13 +35,13 @@ func Execute() error {
 			logger := NewLogger(cfg)
 
 			viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_"))
-			viper.SetEnvPrefix("OCS")
+			viper.SetEnvPrefix("{{ trimPrefix Name `ocis-` | toUpper }}")
 			viper.AutomaticEnv()
 
 			if c.IsSet("config-file") {
 				viper.SetConfigFile(c.String("config-file"))
 			} else {
-				viper.SetConfigName("ocs")
+				viper.SetConfigName("{{ trimPrefix Name `ocis-` }}")
 
 				viper.AddConfigPath("/etc/ocis")
 				viper.AddConfigPath("$HOME/.ocis")
@@ -95,7 +95,7 @@ func Execute() error {
 // NewLogger initializes a service-specific logger instance.
 func NewLogger(cfg *config.Config) log.Logger {
 	return log.NewLogger(
-		log.Name("ocs"),
+		log.Name("{{ trimPrefix Name `ocis-` }}"),
 		log.Level(cfg.Log.Level),
 		log.Pretty(cfg.Log.Pretty),
 		log.Color(cfg.Log.Color),
