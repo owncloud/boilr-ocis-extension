@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi"
-	"github.com/owncloud/ocis-ocs/pkg/config"
+	"github.com/owncloud/{{ Name }}/pkg/config"
 )
 
 // Service defines the extension handlers.
@@ -20,7 +20,7 @@ func NewService(opts ...Option) Service {
 	m := chi.NewMux()
 	m.Use(options.Middleware...)
 
-	svc := Ocs{
+	svc := {{ trimPrefix Name `ocis-` | title }}{
 		config: options.Config,
 		mux:    m,
 	}
@@ -32,19 +32,19 @@ func NewService(opts ...Option) Service {
 	return svc
 }
 
-// Ocs defines implements the business logic for Service.
-type Ocs struct {
+// {{ trimPrefix Name `ocis-` | title }} defines implements the business logic for Service.
+type {{ trimPrefix Name `ocis-` | title }} struct {
 	config *config.Config
 	mux    *chi.Mux
 }
 
 // ServeHTTP implements the Service interface.
-func (g Ocs) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (g {{ trimPrefix Name `ocis-` | title }}) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	g.mux.ServeHTTP(w, r)
 }
 
 // Dummy implements the Service interface.
-func (g Ocs) Dummy(w http.ResponseWriter, r *http.Request) {
+func (g {{ trimPrefix Name `ocis-` | title }}) Dummy(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusOK)
 

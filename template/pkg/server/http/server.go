@@ -1,8 +1,8 @@
 package http
 
 import (
-	svc "github.com/owncloud/ocis-ocs/pkg/service/v0"
-	"github.com/owncloud/ocis-ocs/pkg/version"
+	svc "github.com/owncloud/{{ Name }}/pkg/service/v0"
+	"github.com/owncloud/{{ Name }}/pkg/version"
 	"github.com/owncloud/ocis-pkg/v2/middleware"
 	"github.com/owncloud/ocis-pkg/v2/service/http"
 )
@@ -13,7 +13,7 @@ func Server(opts ...Option) (http.Service, error) {
 
 	service := http.NewService(
 		http.Logger(options.Logger),
-		http.Name("ocs"),
+		http.Name("{{ trimPrefix Name `ocis-` }}"),
 		http.Version(version.String),
 		http.Namespace(options.Config.HTTP.Namespace),
 		http.Address(options.Config.HTTP.Addr),
@@ -31,7 +31,7 @@ func Server(opts ...Option) (http.Service, error) {
 			middleware.Cors,
 			middleware.Secure,
 			middleware.Version(
-				"ocs",
+				"{{ trimPrefix Name `ocis-` }}",
 				version.String,
 			),
 			middleware.Logger(

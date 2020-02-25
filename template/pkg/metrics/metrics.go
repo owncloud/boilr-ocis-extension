@@ -5,7 +5,7 @@ var (
 	Namespace = "ocis"
 
 	// Subsystem defines the subsystem for the defines metrics.
-	Subsystem = "ocs"
+	Subsystem = "{{ trimPrefix Name `ocis-` }}"
 )
 
 // Metrics defines the available metrics of this service.
