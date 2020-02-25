@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/micro/cli/v2"
-	"github.com/owncloud/{{ Name }}/pkg/v2/config"
-	"github.com/owncloud/{{ Name }}/pkg/v2/flagset"
-	"github.com/owncloud/{{ Name }}/pkg/v2/version"
+	"github.com/owncloud/{{ Name }}/pkg/config"
+	"github.com/owncloud/{{ Name }}/pkg/flagset"
+	"github.com/owncloud/{{ Name }}/pkg/version"
 	"github.com/owncloud/ocis-pkg/v2/log"
 	"github.com/spf13/viper"
 )

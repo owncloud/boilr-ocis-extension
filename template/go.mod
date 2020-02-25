@@ -1,4 +1,4 @@
-module github.com/owncloud/ocis-ocs
+module github.com/owncloud/{{ Name }}
 
 go 1.13
 

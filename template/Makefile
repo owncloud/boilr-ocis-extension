@@ -1,5 +1,5 @@
 SHELL := bash
-NAME := ocis-ocs
+NAME := {{ Name }}
 IMPORT := github.com/owncloud/$(NAME)
 BIN := bin
 DIST := dist
