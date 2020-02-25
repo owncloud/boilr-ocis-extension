@@ -48,5 +48,5 @@ func (g {{ trimPrefix Name `ocis-` | title }}) Dummy(w http.ResponseWriter, r *h
 	w.Header().Set("Content-Type", "text/plain")
 	w.WriteHeader(http.StatusOK)
 
-	w.Write([]byte(http.StatusText(http.StatusOK)))
+	w.Write([]byte("Hello {{ Name }}!"))
 }
