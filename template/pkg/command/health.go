@@ -1,4 +1,4 @@
-{{`package command
+package command
 
 import (
 	"fmt"
@@ -46,4 +46,4 @@ func Health(cfg *config.Config) *cli.Command {
 			return nil
 		},
 	}
-}`}}
+}
