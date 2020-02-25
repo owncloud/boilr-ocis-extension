@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/owncloud/{{ Name }}/pkg/config"
-	"github.com/owncloud/ocis-ocs/pkg/v2/version"
+	"github.com/owncloud/{{ Name }}/pkg/version"
 	"github.com/owncloud/ocis-pkg/v2/service/debug"
 )
 
