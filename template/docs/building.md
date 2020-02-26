@@ -16,7 +16,7 @@ cd {{ Name }}
 
 All required tool besides Go itself and make are bundled or getting automatically installed within the `Gopath`. All commands to build this project are part of our `Makefile`.
 
-### Backend
+## Backend
 
 {{`{{< highlight txt >}}
 make generate
