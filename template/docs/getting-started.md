@@ -7,7 +7,7 @@ geekdocEditPath: edit/master/docs
 geekdocFilePath: getting-started.md
 ---
 
-{{< toc >}}
+{{`{{< toc >}}`}}
 
 ## Installation
 
