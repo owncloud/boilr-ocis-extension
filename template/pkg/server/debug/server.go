@@ -15,7 +15,7 @@ func Server(opts ...Option) (*http.Server, error) {
 
 	return debug.NewService(
 		debug.Logger(options.Logger),
-		debug.Name("ocs"),
+		debug.Name("{{ Name }}"),
 		debug.Version(version.String),
 		debug.Address(options.Config.Debug.Addr),
 		debug.Token(options.Config.Debug.Token),
