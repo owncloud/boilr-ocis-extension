@@ -1,8 +1,10 @@
 ---
 title: "Getting Started"
 date: 2018-05-02T00:00:00+00:00
-anchor: "getting-started"
 weight: 20
+geekdocRepo: https://github.com/owncloud/{{ Name }}
+geekdocEditPath: edit/master/docs
+geekdocFilePath: getting-started.md
 ---
 
 ### Installation
@@ -27,57 +29,60 @@ If you prefer to configure the service with environment variables you can see th
 
 ##### Global
 
-OCS_CONFIG_FILE
+{{ trimPrefix Name `ocis-` | toUpper }}_CONFIG_FILE
 : Path to config file, empty default value
 
-OCS_LOG_LEVEL
+{{ trimPrefix Name `ocis-` | toUpper }}_LOG_LEVEL
 : Set logging level, defaults to `info`
 
-OCS_LOG_COLOR
+{{ trimPrefix Name `ocis-` | toUpper }}_LOG_COLOR
 : Enable colored logging, defaults to `true`
 
-OCS_LOG_PRETTY
+{{ trimPrefix Name `ocis-` | toUpper }}_LOG_PRETTY
 : Enable pretty logging, defaults to `true`
 
 ##### Server
 
-OCS_TRACING_ENABLED
+{{ trimPrefix Name `ocis-` | toUpper }}_TRACING_ENABLED
 : Enable sending traces, defaults to `false`
 
-OCS_TRACING_TYPE
+{{ trimPrefix Name `ocis-` | toUpper }}_TRACING_TYPE
 : Tracing backend type, defaults to `jaeger`
 
-OCS_TRACING_ENDPOINT
+{{ trimPrefix Name `ocis-` | toUpper }}_TRACING_ENDPOINT
 : Endpoint for the agent, empty default value
 
-OCS_TRACING_COLLECTOR
+{{ trimPrefix Name `ocis-` | toUpper }}_TRACING_COLLECTOR
 : Endpoint for the collector, empty default value
 
-OCS_TRACING_SERVICE
-: Service name for tracing, defaults to `ocs`
+{{ trimPrefix Name `ocis-` | toUpper }}_TRACING_SERVICE
+: Service name for tracing, defaults to `{{ Name }}`
 
-OCS_DEBUG_ADDR
-: Address to bind debug server, defaults to `0.0.0.0:9114`
+{{ trimPrefix Name `ocis-` | toUpper }}_DEBUG_ADDR
+: Address to bind debug server, defaults to `0.0.0.0:{{ DebugPort }}`
 
-OCS_DEBUG_TOKEN
+{{ trimPrefix Name `ocis-` | toUpper }}_DEBUG_TOKEN
 : Token to grant metrics access, empty default value
 
-OCS_DEBUG_PPROF
+{{ trimPrefix Name `ocis-` | toUpper }}_DEBUG_PPROF
 : Enable pprof debugging, defaults to `false`
 
-OCS_DEBUG_ZPAGES
+{{ trimPrefix Name `ocis-` | toUpper }}_DEBUG_ZPAGES
 : Enable zpages debugging, defaults to `false`
 
-OCS_HTTP_ADDR
-: Address to bind http server, defaults to `0.0.0.0:9110`
+{{ trimPrefix Name `ocis-` | toUpper }}_HTTP_ADDR
+: Address to bind http server, defaults to `0.0.0.0:{{ ServicePort }}`
 
-OCS_HTTP_ROOT
+{{ trimPrefix Name `ocis-` | toUpper }}_HTTP_NAMESPACE
+: The http namespace
+
+{{ trimPrefix Name `ocis-` | toUpper }}_HTTP_ROOT
 : Root path of http server, defaults to `/`
 
 ##### Health
 
-OCS_DEBUG_ADDR
-: Address to debug endpoint, defaults to `0.0.0.0:9114`
+{{ trimPrefix Name `ocis-` | toUpper }}_DEBUG_ADDR
+: Address to debug endpoint, defaults to `0.0.0.0:{{ DebugPort }}`
 
 #### Commandline flags
 
@@ -112,10 +117,10 @@ If you prefer to configure the service with commandline flags you can see the av
 : Endpoint for the collector, empty default value
 
 --tracing-service
-: Service name for tracing, defaults to `ocs`
+: Service name for tracing, defaults to `{{ trimPrefix Name `ocis-` }}`
 
 --debug-addr
-: Address to bind debug server, defaults to `0.0.0.0:9114`
+: Address to bind debug server, defaults to `0.0.0.0:{{ DebugPort }}`
 
 --debug-token
 : Token to grant metrics access, empty default value
@@ -127,7 +132,7 @@ If you prefer to configure the service with commandline flags you can see the av
 : Enable zpages debugging, defaults to `false`
 
 --http-addr
-: Address to bind http server, defaults to `0.0.0.0:9110`
+: Address to bind http server, defaults to `0.0.0.0:{{ ServicePort }}`
 
 --http-namespace
 : Namespace for internal services communication, defaults to `com.owncloud.web`
@@ -138,22 +143,22 @@ If you prefer to configure the service with commandline flags you can see the av
 ##### Health
 
 --debug-addr
-: Address to debug endpoint, defaults to `0.0.0.0:9114`
+: Address to debug endpoint, defaults to `0.0.0.0:{{ DebugPort }}`
 
 #### Configuration file
 
-So far we support the file formats `JSON` and `YAML`, if you want to get a full example configuration just take a look at [our repository](https://github.com/owncloud/ocis-ocs/tree/master/config), there you can always see the latest configuration format. These example configurations include all available options and the default values. The configuration file will be automatically loaded if it's placed at `/etc/ocis/ocs.yml`, `${HOME}/.ocis/ocs.yml` or `$(pwd)/config/ocs.yml`.
+So far we support the file formats `JSON` and `YAML`, if you want to get a full example configuration just take a look at [our repository](https://github.com/owncloud/{{ Name }}/tree/master/config), there you can always see the latest configuration format. These example configurations include all available options and the default values. The configuration file will be automatically loaded if it's placed at `/etc/ocis/{{ trimPrefix Name `ocis-` }}.yml`, `${HOME}/.ocis/{{ trimPrefix Name `ocis-` }}.yml` or `$(pwd)/config/{{ trimPrefix Name `ocis-` }}.yml`.
 
 ### Usage
 
-The program provides a few sub-commands on execution. The available configuration methods have already been mentioned above. Generally you can always see a formated help output if you execute the binary via `ocis-ocs --help`.
+The program provides a few sub-commands on execution. The available configuration methods have already been mentioned above. Generally you can always see a formated help output if you execute the binary via `{{ Name }} --help`.
 
 #### Server
 
 The server command is used to start the http and debug server on two addresses within a single process. The http server is serving the general webservice while the debug server is used for health check, readiness check and to server the metrics mentioned below. For further help please execute:
 
 {{`{{< highlight txt >}}
-ocis-ocs server --help
+{{ Name }} server --help
 {{< / highlight >}}`}}
 
 #### Health
@@ -161,12 +166,12 @@ ocis-ocs server --help
 The health command is used to execute a health check, if the exit code equals zero the service should be up and running, if the exist code is greater than zero the service is not in a healthy state. Generally this command is used within our Docker containers, it could also be used within Kubernetes.
 
 {{`{{< highlight txt >}}
-ocis-ocs health --help
+{{ Name }} health --help
 {{< / highlight >}}`}}
 
 ### Metrics
 
-This service provides some [Prometheus](https://prometheus.io/) metrics through the debug endpoint, you can optionally secure the metrics endpoint by some random token, which got to be configured through one of the flag `--debug-token` or the environment variable `OCS_DEBUG_TOKEN` mentioned above. By default the metrics endpoint is bound to `http://0.0.0.0:9114/metrics`.
+This service provides some [Prometheus](https://prometheus.io/) metrics through the debug endpoint, you can optionally secure the metrics endpoint by some random token, which got to be configured through one of the flag `--debug-token` or the environment variable `{{ trimPrefix Name `ocis-` | toUpper }}_DEBUG_TOKEN` mentioned above. By default the metrics endpoint is bound to `http://0.0.0.0:{{ DebugPort }}/metrics`.
 
 go_gc_duration_seconds
 : A summary of the GC invocation durations

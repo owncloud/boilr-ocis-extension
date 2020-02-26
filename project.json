@@ -1,4 +1,6 @@
 {
     "Name": "ocis-boilerplate",
-    "CmdUsage": "Example usage"
+    "CmdUsage": "Example usage",
+    "ServicePort": "9110",
+    "DebugPort": "9114"
 }

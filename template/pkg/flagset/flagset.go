@@ -42,7 +42,7 @@ func HealthWithConfig(cfg *config.Config) []cli.Flag {
 	return []cli.Flag{
 		&cli.StringFlag{
 			Name:        "debug-addr",
-			Value:       "0.0.0.0:9114",
+			Value:       "0.0.0.0:{{ DebugPort }}",
 			Usage:       "Address to debug endpoint",
 			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_DEBUG_ADDR"},
 			Destination: &cfg.Debug.Addr,
@@ -82,14 +82,14 @@ func ServerWithConfig(cfg *config.Config) []cli.Flag {
 		},
 		&cli.StringFlag{
 			Name:        "tracing-service",
-			Value:       "ocs",
+			Value:       "{{ trimPrefix Name `ocis-` }}",
 			Usage:       "Service name for tracing",
 			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_TRACING_SERVICE"},
 			Destination: &cfg.Tracing.Service,
 		},
 		&cli.StringFlag{
 			Name:        "debug-addr",
-			Value:       "0.0.0.0:9114",
+			Value:       "0.0.0.0:{{ DebugPort }}",
 			Usage:       "Address to bind debug server",
 			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_DEBUG_ADDR"},
 			Destination: &cfg.Debug.Addr,
@@ -115,7 +115,7 @@ func ServerWithConfig(cfg *config.Config) []cli.Flag {
 		},
 		&cli.StringFlag{
 			Name:        "http-addr",
-			Value:       "0.0.0.0:9110",
+			Value:       "0.0.0.0:{{ ServicePort }}",
 			Usage:       "Address to bind http server",
 			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_HTTP_ADDR"},
 			Destination: &cfg.HTTP.Addr,
@@ -124,7 +124,7 @@ func ServerWithConfig(cfg *config.Config) []cli.Flag {
 			Name:        "http-namespace",
 			Value:       "com.owncloud.web",
 			Usage:       "Set the base namespace for the http namespace",
-			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_NAMESPACE"},
+			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_HTTP_NAMESPACE"},
 			Destination: &cfg.HTTP.Namespace,
 		},
 		&cli.StringFlag{

@@ -6,7 +6,7 @@
 
 ## Install
 
-You can download prebuilt binaries from the GitHub releases or from our [download mirrors](http://download.owncloud.com/ocis/{{ trimPrefix Name `ocis-` | toUpper }}/). For instructions how to install this on your platform you should take a look at our [documentation](https://owncloud.github.io/{{ Name }}/)
+You can download prebuilt binaries from the GitHub releases or from our [download mirrors](http://download.owncloud.com/ocis/{{ trimPrefix Name `ocis-` }}/). For instructions how to install this on your platform you should take a look at our [documentation](https://owncloud.github.io/extensions/ocis_{{ trimPrefix Name `ocis-` }}/)
 
 ## Development
 
