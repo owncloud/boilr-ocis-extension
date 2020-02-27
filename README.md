@@ -1,5 +1,7 @@
 # ownCloud Infinite Scale: Boilerplate
 
+[![Build Status](https://cloud.drone.io/api/badges/owncloud/boilr-ocis-extension/status.svg)](https://cloud.drone.io/owncloud/boilr-ocis-extension)
+
 Template to bootstrap an oCIS Extensions based on [owncloud/ocis-hello](https://github.com/owncloud/ocis-hello)
 
 ## Getting Started
