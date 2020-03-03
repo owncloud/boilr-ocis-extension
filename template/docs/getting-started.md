@@ -58,7 +58,7 @@ If you prefer to configure the service with environment variables you can see th
 : Endpoint for the collector, empty default value
 
 {{ trimPrefix Name `ocis-` | toUpper }}_TRACING_SERVICE
-: Service name for tracing, defaults to `{{ Name }}`
+: Service name for tracing, defaults to `{{ trimPrefix Name `ocis-` }}`
 
 {{ trimPrefix Name `ocis-` | toUpper }}_DEBUG_ADDR
 : Address to bind debug server, defaults to `0.0.0.0:{{ DebugPort }}`
@@ -159,16 +159,16 @@ The program provides a few sub-commands on execution. The available configuratio
 
 The server command is used to start the http and debug server on two addresses within a single process. The http server is serving the general webservice while the debug server is used for health check, readiness check and to server the metrics mentioned below. For further help please execute:
 
-{{`{{< highlight txt >}}
-{{ Name }} server --help
+{{`{{< highlight txt >}}`}}
+{{ Name }}{{` server --help
 {{< / highlight >}}`}}
 
 ### Health
 
 The health command is used to execute a health check, if the exit code equals zero the service should be up and running, if the exist code is greater than zero the service is not in a healthy state. Generally this command is used within our Docker containers, it could also be used within Kubernetes.
 
-{{`{{< highlight txt >}}
-{{ Name }} health --help
+{{`{{< highlight txt >}}`}}
+{{ Name }}{{` health --help
 {{< / highlight >}}`}}
 
 ## Metrics
