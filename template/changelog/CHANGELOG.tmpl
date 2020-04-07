@@ -20,7 +20,7 @@ The following sections list the changes in `}}{{ Name }} {{`{{ .Version }}.
 
 {{- /* last version managed by calens, end of the loop */ -}}
 {{ if eq .Version "0.1.0" -}}
-[{{ .Version }}]: https://github.com/owncloud/`}}{{ Name }}{{`/compare/c43f3a33cb0b57d7e25ebc88c138d22e95f88cfe...v{{ .Version }}
+[{{ .Version }}]: https://github.com/owncloud/`}}{{ Name }}{{`/compare/`}}{{ GitRootCommitId }}{{`...v{{ .Version }}
 
 {{ end -}}
 {{ else -}}
