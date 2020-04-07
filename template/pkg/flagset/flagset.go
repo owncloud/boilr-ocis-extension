@@ -24,12 +24,14 @@ func RootWithConfig(cfg *config.Config) []cli.Flag {
 		},
 		&cli.BoolFlag{
 			Name:        "log-pretty",
+			Value:       true,
 			Usage:       "Enable pretty logging",
 			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_LOG_PRETTY"},
 			Destination: &cfg.Log.Pretty,
 		},
 		&cli.BoolFlag{
 			Name:        "log-color",
+			Value:       true,
 			Usage:       "Enable colored logging",
 			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_LOG_COLOR"},
 			Destination: &cfg.Log.Color,
