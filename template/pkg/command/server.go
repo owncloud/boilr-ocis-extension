@@ -29,15 +29,18 @@ func Server(cfg *config.Config) *cli.Command {
 		Name:  "server",
 		Usage: "Start integrated server",
 		Flags: flagset.ServerWithConfig(cfg),
-		Before: func(c *cli.Context) error {
+		Before: func(ctx *cli.Context) error {
 			if cfg.HTTP.Root != "/" {
 				cfg.HTTP.Root = strings.TrimSuffix(cfg.HTTP.Root, "/")
 			}
 
-			return nil
+			// When running on single binary mode the before hook from the root command won't get called. We manually
+			// call this before hook from ocis command, so the configuration can be loaded.
+			return ParseConfig(ctx, cfg)
 		},
 		Action: func(c *cli.Context) error {
 			logger := NewLogger(cfg)
+			httpNamespace := c.String("http-namespace")
 
 			if cfg.Tracing.Enabled {
 				switch t := cfg.Tracing.Type; t {
@@ -134,17 +137,18 @@ func Server(cfg *config.Config) *cli.Command {
 			{
 				server, err := http.Server(
 					http.Logger(logger),
+					http.Namespace(httpNamespace),
 					http.Context(ctx),
 					http.Config(cfg),
 					http.Metrics(metrics),
-					http.Flags(flagset.RootWithConfig(cfg)),
-					http.Flags(flagset.ServerWithConfig(cfg)),
+					http.Flags(flagset.RootWithConfig(config.New())),
+					http.Flags(flagset.ServerWithConfig(config.New())),
 				)
 
 				if err != nil {
-					logger.Info().
+					logger.Error().
 						Err(err).
-						Str("transport", "http").
+						Str("server", "http").
 						Msg("Failed to initialize server")
 
 					return err
@@ -154,7 +158,7 @@ func Server(cfg *config.Config) *cli.Command {
 					return server.Run()
 				}, func(_ error) {
 					logger.Info().
-						Str("transport", "http").
+						Str("server", "http").
 						Msg("Shutting down server")
 
 					cancel()
@@ -169,9 +173,9 @@ func Server(cfg *config.Config) *cli.Command {
 				)
 
 				if err != nil {
-					logger.Info().
+					logger.Error().
 						Err(err).
-						Str("transport", "debug").
+						Str("server", "debug").
 						Msg("Failed to initialize server")
 
 					return err
@@ -186,13 +190,13 @@ func Server(cfg *config.Config) *cli.Command {
 					defer cancel()
 
 					if err := server.Shutdown(ctx); err != nil {
-						logger.Info().
+						logger.Error().
 							Err(err).
-							Str("transport", "debug").
+							Str("server", "debug").
 							Msg("Failed to shutdown server")
 					} else {
 						logger.Info().
-							Str("transport", "debug").
+							Str("server", "debug").
 							Msg("Shutting down server")
 					}
 				})
