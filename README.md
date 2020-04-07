@@ -10,8 +10,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-[boilr](https://github.com/tmrts/boilr). Binaries for Linux & OSX are built automatically by Travis every release.
-You can download them directly or run the installation script.
+[boilr](https://github.com/tmrts/boilr). Binaries for Linux & OSX are currently broken, so please install boilr from source with `go get github.com/tmrts/boilr`. This will install boilr into your $GOPATH.
 
 Please see [Installation](https://github.com/tmrts/boilr/wiki/Installation) page for more information.
 
@@ -20,7 +19,7 @@ Please see [Installation](https://github.com/tmrts/boilr/wiki/Installation) page
 Note that this repo does not need to be cloned. You can download a template and run it:
 
 ```console
-boilr template download https://github.com/refs/ocis-boilerplate ocis-boilerplate
+boilr template download https://github.com/owncloud/boilr-ocis-extension ocis-boilerplate
 boilr template use ocis-boilerplate /var/tmp/ocis-boilerplate
 ```
 
