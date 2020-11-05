@@ -5,6 +5,7 @@ import (
 	"github.com/owncloud/{{ Name }}/pkg/version"
 	"github.com/owncloud/ocis-pkg/v2/middleware"
 	"github.com/owncloud/ocis-pkg/v2/service/http"
+	"github.com/owncloud/{{ Name }}/pkg/assets"
 )
 
 // Server initializes the http service and server.
@@ -46,9 +47,21 @@ func Server(opts ...Option) (http.Service, error) {
 		handle = svc.NewTracing(handle)
 	}
 
+	mux := chi.NewMux()
+
+	mux.Use(middleware.Static(
+		options.Config.HTTP.Root,
+		assets.New(
+			assets.Logger(options.Logger),
+			assets.Config(options.Config),
+		),
+	))
+
+	mux.Route(options.Config.HTTP.Root, func(r chi.Router) {})
+
 	service.Handle(
 		"/",
-		handle,
+		mux,
 	)
 
 	service.Init()
