@@ -1,7 +1,8 @@
 {
-    "Name": "ocis-boilerplate",
+    "Name": "ocis-yourExtension",
     "CmdUsage": "Example usage",
     "ServicePort": "9110",
     "DebugPort": "9114",
-    "GitRootCommitId" : ""
+    "GitRootCommitId" : "",
+    "ExtensionId": "yourExtensionId"
 }
