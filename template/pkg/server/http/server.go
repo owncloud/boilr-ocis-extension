@@ -6,6 +6,7 @@ import (
 	"github.com/owncloud/ocis-pkg/v2/middleware"
 	"github.com/owncloud/ocis-pkg/v2/service/http"
 	"github.com/owncloud/{{ Name }}/pkg/assets"
+	"github.com/go-chi/chi"
 )
 
 // Server initializes the http service and server.
