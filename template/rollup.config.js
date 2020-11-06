@@ -21,6 +21,12 @@ function onwarn (warning) {
   }
 }
 
+function logEnv () {
+  const message = production ? 'Building for production' : 'Starting dev server'
+
+  console.log(message)
+}
+
 const pipeline = [
   vue(),
   replace({
@@ -45,20 +51,22 @@ const pipeline = [
   production && filesize()
 ]
 
-export default [
-  {
-    input: 'ui/src/app.js',
-    output: {
-      file: 'assets/{{ ExtensionId }}.js',
-      format: 'amd'
-    },
-    onwarn,
-    plugins: [
-      ...pipeline,
-      !production && serve('assets')
-    ]
+const outputs = [{
+  input: 'ui/src/app.js',
+  output: {
+    file: 'assets/{{ Name }}.js',
+    format: 'amd'
   },
-  {
+  onwarn,
+  plugins: [
+    logEnv(),
+    ...pipeline,
+    !production && serve('assets')
+  ]
+}]
+
+if (!production) {
+  outputs.push({
     input: 'ui/dev/src/main.js',
     output: {
       file: 'assets/app.js',
@@ -74,5 +82,7 @@ export default [
       }),
       postcss()
     ]
-  }
-]
+  })
+}
+
+export default outputs

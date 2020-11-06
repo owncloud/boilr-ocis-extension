@@ -77,5 +77,5 @@ const loadExtension = extension => {
 
 (() => {
   // eslint-disable-next-line no-undef
-  requirejs([window.location.origin + '/{{ ExtensionId }}.js'], loadExtension)
+  requirejs([window.location.origin + '/{{ Name }}.js'], loadExtension)
 })()

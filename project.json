@@ -3,6 +3,5 @@
     "CmdUsage": "Example usage",
     "ServicePort": "9110",
     "DebugPort": "9114",
-    "GitRootCommitId" : "",
-    "ExtensionId": "yourExtensionId"
+    "GitRootCommitId" : ""
 }
