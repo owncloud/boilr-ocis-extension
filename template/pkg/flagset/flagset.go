@@ -140,7 +140,7 @@ func ServerWithConfig(cfg *config.Config) []cli.Flag {
 			Name:        "asset-path",
 			Value:       "",
 			Usage:       "Path to custom assets",
-			EnvVars:     []string{"HELLO_ASSET_PATH"},
+			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_ASSET_PATH"},
 			Destination: &cfg.Asset.Path,
 		},
 	}
