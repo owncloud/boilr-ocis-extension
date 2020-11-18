@@ -11,6 +11,7 @@ import globals from 'rollup-plugin-node-globals'
 import serve from 'rollup-plugin-serve'
 import copy from 'rollup-plugin-copy'
 import postcss from 'rollup-plugin-postcss'
+import livereload from 'rollup-plugin-livereload'
 
 const production = !process.env.ROLLUP_WATCH
 
@@ -61,7 +62,8 @@ const outputs = [{
   plugins: [
     logEnv(),
     ...pipeline,
-    !production && serve('assets')
+    !production && serve('assets'),
+    !production && livereload()
   ]
 }]
 
