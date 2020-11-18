@@ -136,5 +136,12 @@ func ServerWithConfig(cfg *config.Config) []cli.Flag {
 			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_HTTP_ROOT"},
 			Destination: &cfg.HTTP.Root,
 		},
+		&cli.StringFlag{
+			Name:        "asset-path",
+			Value:       "",
+			Usage:       "Path to custom assets",
+			EnvVars:     []string{"{{ trimPrefix Name `ocis-` | toUpper }}_ASSET_PATH"},
+			Destination: &cfg.Asset.Path,
+		},
 	}
 }

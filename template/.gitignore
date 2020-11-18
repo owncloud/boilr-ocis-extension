@@ -5,4 +5,4 @@ coverage.out
 /hugo
 
 /node_modules
-/assets
+/assets/**

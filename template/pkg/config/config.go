@@ -38,6 +38,12 @@ type Config struct {
 	Debug   Debug
 	HTTP    HTTP
 	Tracing Tracing
+	Asset   Asset
+}
+
+// Asset defines the available asset configuration.
+type Asset struct {
+	Path string
 }
 
 // New initializes a new configuration with or without defaults.
