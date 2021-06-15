@@ -35,6 +35,12 @@ def test(ctx):
           'boilr template save . ocis-boilerplate',
         ],
       },
-    ]
+    ],
+    'trigger': {
+      'ref': [
+        'refs/heads/master',
+        'refs/tags/**',
+        'refs/pull/**',
+      ],
+    },
   }
-  
